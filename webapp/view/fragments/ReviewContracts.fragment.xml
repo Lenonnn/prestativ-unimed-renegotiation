@@ -1,0 +1,201 @@
+<core:FragmentDefinition 
+        xmlns="sap.m" 
+        xmlns:core="sap.ui.core" 
+        xmlns:ui="sap.ui.table">
+    <Dialog 
+        id="SelectedContracts"
+        closeOnNavigation="true" 
+        contentHeight="100%" 
+        contentWidth="100%" 
+        draggable="false" 
+        escapeHandler="" 
+        horizontalScrolling="true" 
+        icon="sap-icon://code1" 
+        resizable="false" 
+        showHeader="true" 
+        state="Information" 
+        stretch="false" 
+        title="{i18n>DialContractTitle}" 
+        titleAlignment="Center" 
+        type="Standard" 
+        verticalScrolling="true"
+        class="sapUiTinyMarginTopBottom" >
+        <beginButton>
+        </beginButton>
+
+        <buttons />
+        <content>
+            <VBox fitContainer="true" class="sapUiMediumMargin">
+                <ui:Table id="selectedItemsTable" 
+                          rows="{ path: 'selectedItems>/items' }" 
+                          visibleRowCount="14" 
+                          selectionMode="None" 
+                          enableColumnFreeze="false" 
+                          enableCellFilter="true" 
+                          alternateRowColors="true"             
+                          class="sapUiResponsiveContentPadding">
+
+                    <ui:columns>
+                        <ui:Column id="dialCustomer" width="8%">
+                            <Label text="{i18n>Customer}" />
+                            <ui:template>
+                                <Link text="{selectedItems>Customer}" />
+                            </ui:template>
+                        </ui:Column>
+
+                        <ui:Column id="dialCompanyCode" width="6%">
+                            <Label text="{i18n>Company}" />
+                            <ui:template>
+                                <Text text="{selectedItems>Company}" />
+                            </ui:template>
+                        </ui:Column>
+
+                        <ui:Column id="dialFiscalYear" width="7%">
+                            <Label text="{i18n>FiscalYear}" />
+                            <ui:template>
+                                <Text text="{selectedItems>FiscalYear}" />
+                            </ui:template>
+                        </ui:Column>
+
+                        <ui:Column id="dialDocument" width="9%">
+                            <Label text="{i18n>Document}" />
+                            <ui:template>
+                                <Link text="{selectedItems>Document}" />
+                            </ui:template>
+                        </ui:Column>
+
+                        <!-- <ui:Column id="dialDocumentItem" width="8%">
+                            <Label text="{i18n>Item}" />
+                            <ui:template>
+                                <Text text="{selectedItems>Item}" />
+                            </ui:template>
+                        </ui:Column> -->
+
+                        <ui:Column id="dialDocumentType" width="10%">
+                            <Label text="{i18n>DocumentType}" />
+                            <ui:template>
+                                <Text text="{selectedItems>DocumentType}" />
+                            </ui:template>
+                        </ui:Column>
+
+                         <ui:Column id="dialNetDueDate" width="9%">
+                            <Label text="{i18n>NetDueDate}" />
+                            <ui:template>
+                       
+                                <Text text="{  path: 'selectedItems>NetDueDate',
+                                               type : 'sap.ui.model.type.Date',
+                                               formatOptions: {
+                                                    style: 'short'
+                                                } 
+                                            }" />
+                            </ui:template>
+                        </ui:Column>
+
+                        <ui:Column id="dialAmount" width="9%">
+                            <Label text="{i18n>Amount}" />
+                            <ui:template>
+                                <Text text="{ path      : 'selectedItems>Amount',
+                                              formatter : '.formatter.currencyBRL' }" />
+                            </ui:template>
+                        </ui:Column>
+
+                        <ui:Column id="dialTermsOfPayment" width="9%">
+                            <Label text="{i18n>TermsOfPayment}" />
+                                    <!-- change="onLiveChangePayment" -->
+                            <ui:template>
+                                <ComboBox 
+                                    id="editTermsOfPayment"
+                                    selectedKey="{selectedItems>TermsOfPayment}"
+                                    editable="{selectedItems>editableTermsOfPayment}"
+                                    items="{
+                                        path: '/ZFI_CDS_RENEGOTIATE_ZTERM'
+                                    }"
+                                >
+                                <core:Item
+                                    enabled="true"
+                                    key="{Zterm}"
+                                    text="{Zterm} - {Text1}"
+                                    textDirection="Inherit"
+                                >     
+                                </core:Item>
+                                </ComboBox>
+                            </ui:template>
+                        </ui:Column>
+
+                        <ui:Column id="dialFirstDueDate" width="12%">
+                            <Label text="{i18n>FirstDueDate}" />
+                            <ui:template>
+                                <DatePicker id="editFirstDueDate" 
+                                            value="{selectedItems>FirstDueDate}" 
+                                            editable="{selectedItems>editableFirstDueDate}"
+                                            valueFormat="dd/MM/yyyy"
+                                            displayFormat="short"
+                                             />
+                            </ui:template>
+                        </ui:Column>
+
+                        <!-- New Columns -->
+                         <!-- <ui:Column id="dialDays" width="9%">
+                            <Label text="{i18n>Days}" />
+                            <ui:template>
+                                <Input id="InputDays" value="{selectedItems>VHDay}" editable="true"  />
+                            </ui:template>
+                        </ui:Column> -->
+
+                        <ui:Column id="dialBaseDay" width="9%">
+                            <Label text="{i18n>InputDaysBase}" />
+                            <ui:template>
+                                <Text text="{ path      : 'selectedItems>FirstDueDate' }" />
+                            </ui:template>
+                        </ui:Column>
+
+                        <ui:Column id="dialJuros" width="9%">
+                            <Label text="{i18n>InterestRate}" />
+                            <ui:template>
+                                <Input id="InputJuros" value="{selectedItems>InterestRate}"  editable="{selectedItems>InputJuros}"  />
+                            </ui:template>
+                        </ui:Column>
+
+                        <ui:Column id="dialMulta" width="9%">
+                            <Label text="{i18n>FineRate}" />
+                            <ui:template>
+                                <Input id="InputMultas" value="{selectedItems>FineRate}"  editable="{selectedItems>InputMultas}"  />
+                            </ui:template>
+                        </ui:Column>
+
+                        <ui:Column id="dialAcres" width="9%">
+                            <Label text="{i18n>AccrualRate}" />
+                            <ui:template>
+                                <Input id="InputAcres" value="{selectedItems>AccrualRate}" editable="{selectedItems>InputAcres}"  />
+                            </ui:template>
+                        </ui:Column>
+
+                        <ui:Column id="dialSimulate" width="10%">
+                            <Label text="{i18n>NewValue}" />
+                            <ui:template>
+                                <Input id="idSimulatedValue"
+                                       value="{ path      : 'selectedItems>NewValue' }"
+                                       change="onChange" 
+                                       >
+
+                                </Input>
+                            </ui:template>
+                        </ui:Column>
+
+
+                    </ui:columns>
+                </ui:Table>
+            </VBox>
+        </content>
+        <buttons >
+            <Button id="btnSimulate" icon="sap-icon://simulate" text="{i18n>btnSimulate}" press="onSimulateValues" enabled="true" />
+            <Button id="btnClear" icon="sap-icon://clear-all" text="{i18n>btnClear}" press="onClearValues" enabled="true" />
+            <Button id="btnTCD" icon="sap-icon://request" text="{i18n>btnTCD}" press="onGetDebtConfession" enabled="false" />
+            <Button id="btnSendRenegotiation" icon="sap-icon://locate-me" text="{i18n>btnSendRenegotiation}" press="onConfirmRenegotiation" enabled="true" />
+            <Button id="btnCancel" icon="sap-icon://sys-cancel" text="{i18n>btnCancel}" press="onCancelRenegotiation"  enabled="true"/>
+        </buttons>
+        <customHeader />
+        <endButton />
+        <subHeader />
+    </Dialog>
+</core:FragmentDefinition>

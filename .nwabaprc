@@ -1,0 +1,12 @@
+{
+ "base" : "./dist",
+ "conn_usestrictssl" : false,
+ "conn_server" : "https://vhunmds4ci.sap.unimedpoa.com.br:44300",
+ "conn_client" : "050", 
+ "conn_user" : "EY.LSOARES",
+ "conn_password" : "@@Brasil01",
+ "abap_package" : "Z001",
+ "abap_bsp" : "ZUI5_RENEGOTIATION",
+ "abap_bsp_text" : "Renegociação de contas a receber",
+ "abap_transport" : "DS4K901727"
+}

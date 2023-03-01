@@ -1,0 +1,183 @@
+<mvc:View
+    xmlns="sap.m"
+    controllerName="com.prestativ.unimed.zfirenegotiation.controller.Main"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" 
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    displayBlock="true"
+    height="100%"
+>
+    <Shell id="shell">
+        <App id="app">
+            <pages>
+                <Page id="page" 
+                       title="{i18n>title}" 
+                       titleAlignment="Center" >
+                    <content>
+                    <VBox fitContainer="true">
+                    <smartFilterBar:SmartFilterBar id="smartFilterBar" 
+                                                           entitySet="ZFI_CDS_RENEGOTIATE_A" 
+                                                           persistencyKey="FilterBar" 
+                                                           enableBasicSearch="false" 
+                                                           liveMode="false"
+                                                           
+                                                           >
+                                <smartFilterBar:controlConfiguration>
+                                    <smartFilterBar:ControlConfiguration key="Customer" visibleInAdvancedArea="true" width="300rem" preventInitialDataFetchInValueHelpDialog="false" />
+                                    <smartFilterBar:ControlConfiguration key="Company" visibleInAdvancedArea="true" preventInitialDataFetchInValueHelpDialog="false" />
+                                    <smartFilterBar:ControlConfiguration key="FiscalYear" visibleInAdvancedArea="true" preventInitialDataFetchInValueHelpDialog="false" />
+                                    <smartFilterBar:ControlConfiguration key="Document" visibleInAdvancedArea="true" preventInitialDataFetchInValueHelpDialog="false" />
+                                    <smartFilterBar:ControlConfiguration key="Amount" visibleInAdvancedArea="true" preventInitialDataFetchInValueHelpDialog="false" />
+                                </smartFilterBar:controlConfiguration>
+
+                                <smartFilterBar:layoutData>
+                                    <FlexItemData shrinkFactor="0" />
+                                </smartFilterBar:layoutData>
+
+                            </smartFilterBar:SmartFilterBar>
+
+                            <!-- SMART Table -->
+                            <smartTable:SmartTable
+                                id="smartTable"
+                                persistencyKey="SmartTable"
+                                entitySet="ZFI_CDS_RENEGOTIATE_A"
+                                smartFilterId="smartFilterBar"
+                                tableType="ResponsiveTable"
+                                useExportToExcel="true"
+                                useTablePersonalisation="true"
+                                useVariantManagement="true"
+                                fitContainer="true"
+                                header="Documentos"
+                                showRowCount="true"
+                                class="sapUiResponsiveContentPadding"
+                                showFullScreenButton="true" 
+                                initiallyVisibleFields="Company,Customer,FiscalYear,Document,DocumentType,DocumentTypeDesciption" 
+                            >
+                                <!-- editable="true" -->
+                                <smartTable:customToolbar>
+                                    <OverflowToolbar>
+                                        <ToolbarSeparator />
+                                            <ToolbarSpacer />
+                                                <ToggleButton id="btnPrintCts" icon="sap-icon://print"  text="{i18n>btnTCD}" enabled="true" pressed="false" press="onRePrintContracts" />
+                                                <ToggleButton id="btnRen" icon="sap-icon://collections-insight"  text="Renegociação" enabled="true" pressed="false" press="onRenegotiate" />
+                                                <!-- <ToggleButton id="btnTCD" icon="sap-icon://request" text="Termo de Confissão de Dívida" enabled="false" press="onGetDebtConfession" /> -->
+                                        <ToolbarSeparator />
+                                    </OverflowToolbar>
+                                </smartTable:customToolbar>
+
+                                <Table>
+                                    <columns>
+
+                                        <Column id="NetDueDate" hAlign="Begin" width="7rem">
+											<customData>
+												<core:CustomData 
+													key="p13nData"
+													value='\{ "columnKey": "NetDueDate", 
+                                                              "columnIndex":"6", 
+                                                              "leadingProperty": "NetDueDate", 
+                                                              "sortProperty": "NetDueDate", 
+                                                              "displayBehaviour": "descriptionOnly", 
+                                                              "width": "7rem"}'/>
+											</customData>
+											<Label text="{i18n>NetDueDate}" />
+										</Column>
+
+                                        <Column id="Amount" hAlign="End" width="8rem">
+											<customData>
+												<core:CustomData 
+													key="p13nData"
+													value='\{ "columnKey": "Amount", 
+                                                              "columnIndex":"7", 
+                                                              "leadingProperty": "Amount", 
+                                                              "sortProperty": "Amount", 
+                                                              "displayBehaviour": "descriptionOnly", 
+                                                              "width": "8rem"}'/>
+											</customData>
+											<Label text="{i18n>Amount}" />
+										</Column>
+
+                                        <Column id="Status" hAlign="Begin" width="7rem">
+											<customData>
+												<core:CustomData 
+													key="p13nData"
+													value='\{ "columnKey": "Status", 
+                                                              "columnIndex":"8", 
+                                                              "leadingProperty": "Status", 
+                                                              "sortProperty": "Status", 
+                                                              "displayBehaviour": "descriptionOnly", 
+                                                              "width": "7rem"}'/>
+											</customData>
+											<Label text="{i18n>Status}" />
+										</Column>
+
+                                        <Column id="DocStatus" hAlign="Begin" width="12rem">
+											<customData>
+												<core:CustomData 
+													key="p13nData"
+													value='\{ "columnKey": "DocStatus", 
+                                                              "columnIndex":"9", 
+                                                              "leadingProperty": "DocStatus", 
+                                                              "sortProperty": "DocStatus", 
+                                                              "displayBehaviour": "descriptionOnly", 
+                                                              "width": "12rem"}'/>
+											</customData>
+											<Label text="{i18n>DocStatus}" />
+										</Column>
+
+                                    </columns>
+
+                                    <items>
+                                        <ColumnListItem
+                                            vAlign="Inherit"
+                                        >
+                                            <cells>
+                                                <Text 
+													text="{
+														path: 'NetDueDate',
+														type : 'sap.ui.model.type.Date',
+														formatOptions: {
+															style: 'short',
+															UTC: 'true'
+														}
+													}"
+												/>
+                                                <Text 
+													text="{
+														path: 'Amount',
+                                                        type : 'sap.ui.model.type.Float',
+                                                        formatOptions: {
+															preserveDecimals: 'true'
+														}
+													}"
+												/>
+                                                <Text 
+													text="{
+														path: 'Status'
+													}"
+												/>
+                                                <Text 
+													text="{
+														path: 'DocStatus'
+													}"
+												/>
+                                                
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+
+
+
+                                </Table>
+
+                                <smartTable:layoutData>
+                                    <FlexItemData growFactor="1" baseSize="0%" />
+                                </smartTable:layoutData>
+                            </smartTable:SmartTable>
+                    </VBox>
+                    </content>
+                </Page>
+            </pages>
+        </App>
+    </Shell>
+</mvc:View>

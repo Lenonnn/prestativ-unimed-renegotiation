@@ -1,0 +1,49 @@
+<core:FragmentDefinition 
+        xmlns="sap.m" 
+        xmlns:core="sap.ui.core" 
+        >
+    <Dialog closeOnNavigation="true" 
+            contentHeight="40%" 
+            contentWidth="70%" 
+            draggable="false" 
+            escapeHandler="" 
+            horizontalScrolling="true" 
+            icon="" 
+            resizable="false" 
+            showHeader="true" 
+            state="Success" 
+            stretch="false" 
+            title="Impressão de contratos" 
+            titleAlignment="Center" 
+            type="Standard" 
+            verticalScrolling="true">
+
+        <beginButton />
+        <buttons />
+         <content>
+
+            <VBox class="sapUiLargeMargin">
+                <Label text="Escolha o tipo de contrato que deseja imprimir" labelFor="GroupA" class="sapUiTinyMarginTopBottom"/>
+                <!-- <Label text=" "></Label> -->
+                <!-- <RadioButtonGroup id="rBGroup" columns="5" width="100%" valueState="Information" class="sapUiLargeMarginBottom "> -->
+                <!-- <RadioButtonGroup id="rBGroup" width="100%" valueState="Information" class="sapUiLargeMarginBottom" > -->
+                    <CheckBox id="recheckb1" selected="true" text="{i18n>cb1}" valueState="Information"  />
+                    <CheckBox id="recheckb2" selected="true" text="{i18n>cb2}" valueState="Information" />
+                    <CheckBox id="recheckb3" selected="false" text="{i18n>cb3}" valueState="Information" />
+                    <CheckBox id="recheckb4" selected="false" text="{i18n>cb4}" valueState="Information" />
+                    <CheckBox id="recheckb5" selected="false" text="{i18n>cb5}" valueState="Information" />
+                <!-- </RadioButtonGroup> -->
+            </VBox>
+        </content>
+
+        <buttons class="sapUiMediumMarginEnd">
+            <Button id="RebtnDownloadPDF" icon="sap-icon://pdf-attachment" text="{i18n>btnDownloadPDF}" press="onReprintPDF" enabled="true"/>
+            <Button id="RebtnExit" icon="sap-icon://decline" text="{i18n>btnExit}" press="onExitReprint"/>       
+        </buttons>
+
+        <customHeader />
+        <endButton />
+        <subHeader />
+        
+    </Dialog>
+</core:FragmentDefinition>
