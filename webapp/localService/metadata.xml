@@ -267,6 +267,7 @@
                 <Property Name="FineRate" Type="Edm.Decimal" Precision="10" Scale="7" sap:label="Multa %"/>
                 <Property Name="AccrualRate" Type="Edm.Decimal" Precision="10" Scale="7" sap:label="Acréscimo %"/>
                 <Property Name="NewValue" Type="Edm.Decimal" Precision="16" Scale="2" sap:label="Novo Valor Simulado"/>
+                <Property Name="DocStatus" Type="Edm.String" MaxLength="100" sap:label="Status Doc. Renegociado"/>
             </EntityType>
             <EntityType Name="ZFI_CDS_RENEGOTIATE_VHType" sap:label="Renegociação de Contas a Receber VH" sap:content-version="1">
                 <Key>
@@ -279,6 +280,13 @@
                 <Property Name="Customer" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Cliente" sap:quickinfo="Nº cliente" sap:value-list="standard"/>
                 <Property Name="FiscalYear" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:label="Exercício"/>
                 <Property Name="Document" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="N° Documento" sap:quickinfo="Nº documento de um documento contábil"/>
+            </EntityType>
+            <EntityType Name="ZFI_CDS_RENEGOTIATE_ZTERMType" sap:label="Renegociação - Condições de pagamentos" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Zterm"/>
+                </Key>
+                <Property Name="Zterm" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Condições pgto." sap:quickinfo="Chave de condições de pagamento"/>
+                <Property Name="Text1" Type="Edm.String" MaxLength="50" sap:label="Explicação própria" sap:quickinfo="Explicação própria para as condições de pagamento"/>
             </EntityType>
             <EntityType Name="ZFI__CDS_CLIENTType" sap:label="Número do cliente" sap:value-list="true" sap:content-version="1">
                 <Key>
@@ -323,6 +331,7 @@
                 <EntitySet Name="SendRenegotiationSet" EntityType="ZFI_RENEGOTIATION_SRV.SendRenegotiation" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
                 <EntitySet Name="ZFI_CDS_RENEGOTIATE_A" EntityType="ZFI_RENEGOTIATION_SRV.ZFI_CDS_RENEGOTIATE_AType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="ZFI_CDS_RENEGOTIATE_VH" EntityType="ZFI_RENEGOTIATION_SRV.ZFI_CDS_RENEGOTIATE_VHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZFI_CDS_RENEGOTIATE_ZTERM" EntityType="ZFI_RENEGOTIATION_SRV.ZFI_CDS_RENEGOTIATE_ZTERMType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="ZFI__CDS_CLIENT" EntityType="ZFI_RENEGOTIATION_SRV.ZFI__CDS_CLIENTType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="ZFI__CDS_CLIENT_TXT" EntityType="ZFI_RENEGOTIATION_SRV.ZFI__CDS_CLIENT_TXTType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="ZFI__CDS_COMPANY" EntityType="ZFI_RENEGOTIATION_SRV.ZFI__CDS_COMPANYType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>

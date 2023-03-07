@@ -176,11 +176,12 @@ sap.ui.define(
                     }
 
                     // Verify if firts date is on past
-                    if (cProppertyDate === "" || cProppertyDate < cDate) {
+                    // if (cProppertyDate === "" || cProppertyDate < cDate) {
+                    if (cProppertyDate === "" ) {
                       oValidateData = false;
                     }
 
-                    if (oLine.TermsOfPayment > 99) {
+                    if (oLine.TermsOfPayment === '' || oLine.TermsOfPayment === undefined || oLine.TermsOfPayment === null) {
                       oValidateData = false;
                     }
 
@@ -255,8 +256,9 @@ sap.ui.define(
                       }.bind(this),
 
                       error: function (oError) {
-                        console.log(oError);
-                        MessageBox.error("Erro ao renegociar")
+                        let error = JSON.parse( oError.responseText ).error.innererror.errordetails[0].target
+                        //console.log(oError);
+                        MessageBox.error("Erro ao renegociar: " + error)
                       }.bind(this),
                     });
 
